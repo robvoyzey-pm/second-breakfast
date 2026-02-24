@@ -192,37 +192,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 </style>
 </head>
 <body>
-<div class="scr" id="ob-install">
-  <div style="max-width:440px;width:100%;padding:44px 20px 52px;margin:auto">
-    <div class="ob-logo" style="text-align:center;margin-bottom:4px">Second Breakfast<em>.</em></div>
-    <div class="ob-tag" style="text-align:center;margin-bottom:32px">a proper account of a proper adventure</div>
-    <div class="ob-card">
-      <div style="text-align:center;font-size:2rem;margin-bottom:12px">&#127968;</div>
-      <h2 style="text-align:center;margin-bottom:8px">Add to your home screen first</h2>
-      <p style="text-align:center;margin-bottom:20px">One tap away while you travel. Much better than finding a URL at a chai stall.</p>
-      <div id="install-ios" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)">
-        <b style="color:var(--ink);display:block;margin-bottom:6px">On iPhone &#8212; open in Safari:</b>
-        1. Tap the <b>Share</b> button &#8593; at the bottom<br>
-        2. Scroll down and tap <b>Add to Home Screen</b><br>
-        3. Tap <b>Add</b> top right &#8212; done &#10003;<br>
-        <span style="font-size:.72rem;color:var(--ink3);display:block;margin-top:4px">Must be Safari &#8212; Chrome on iPhone cannot do this</span>
-      </div>
-      <div id="install-android" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)">
-        <b style="color:var(--ink);display:block;margin-bottom:6px">On Android &#8212; Chrome:</b>
-        1. Tap the <b>&#8942; menu</b> top right<br>
-        2. Tap <b>Add to Home screen</b><br>
-        3. Tap <b>Add</b> &#8212; done &#10003;
-      </div>
-      <div id="install-other" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:1.7;color:var(--ink2)">
-        <b style="color:var(--ink);display:block;margin-bottom:6px">Add to your home screen:</b>
-        In your browser menu, look for <b>&#8220;Add to Home Screen&#8221;</b> or <b>&#8220;Install app&#8221;</b>.
-      </div>
-      <button id="install-native-btn" class="btn btn-p" onclick="doNativeInstall()" style="display:none;margin-top:6px;padding:16px;font-size:1rem">Add to Home Screen &#8595;</button>
-      <button id="install-manual-btn" class="btn btn-p" onclick="installDone()" style="margin-top:6px;padding:16px;font-size:1rem">I&#8217;ve added it &#8212; let&#8217;s go &#10003;</button>
-      <button class="btn btn-g" onclick="installSkip()" style="margin-top:8px;font-size:.85rem;color:var(--ink3)">Skip &#8212; I&#8217;ll do it later</button>
-    </div>
-  </div>
-</div>
+<div class="scr" id="ob-install"><div style="max-width:440px;width:100%;padding:44px 20px 52px;margin:auto"><div class="ob-logo" style="text-align:center;margin-bottom:4px">Second Breakfast<em>.</em></div><div class="ob-tag" style="text-align:center;margin-bottom:32px">a proper account of a proper adventure</div><div class="ob-card"><div style="text-align:center;font-size:2rem;margin-bottom:12px">&#127968;</div><h2 style="text-align:center;margin-bottom:8px">Add to your home screen first</h2><p style="text-align:center;margin-bottom:20px">One tap away while you travel. Much better than finding a URL at a chai stall.</p><div id="install-ios" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)"><b style="color:var(--ink);display:block;margin-bottom:6px">On iPhone &#8212; open in Safari:</b>1. Tap the <b>Share</b> button &#8593; at the bottom<br>2. Scroll down, tap <b>Add to Home Screen</b><br>3. Tap <b>Add</b> top right &#8212; done &#10003;<br><span style="font-size:.72rem;color:var(--ink3);display:block;margin-top:4px">Must be Safari &#8212; Chrome on iPhone cannot do this</span></div><div id="install-android" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)"><b style="color:var(--ink);display:block;margin-bottom:6px">On Android &#8212; Chrome:</b>1. Tap the <b>&#8942; menu</b> top right<br>2. Tap <b>Add to Home screen</b><br>3. Tap <b>Add</b> &#8212; done &#10003;</div><div id="install-other" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:1.7;color:var(--ink2)"><b style="color:var(--ink);display:block;margin-bottom:6px">Add to your home screen:</b>In your browser menu, look for <b>&#8220;Add to Home Screen&#8221;</b> or <b>&#8220;Install app&#8221;</b>.</div><button id="install-native-btn" class="btn btn-p" onclick="doNativeInstall()" style="display:none;margin-top:6px;padding:16px;font-size:1rem">Add to Home Screen &#8595;</button><button id="install-manual-btn" class="btn btn-p" onclick="installDone()" style="margin-top:6px;padding:16px;font-size:1rem">I&#8217;ve added it &#8212; let&#8217;s go &#10003;</button><button class="btn btn-g" onclick="installSkip()" style="margin-top:8px;font-size:.85rem;color:var(--ink3)">Skip &#8212; I&#8217;ll do it later</button></div></div></div>
 <div class="scr on" id="ob">
   <div class="ob-logo">Second Breakfast<em>.</em></div>
   <div class="ob-tag">a proper account of a proper adventure</div>
@@ -301,7 +271,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
     </div>
 
     <div class="view" id="v-log" >
-      <div class="export-nudge" id="export-nudge"><span class="export-nudge-ico">📦</span><div class="export-nudge-txt"><b>Worth backing up.</b>Export your trail — it's the only copy.</div><button class="export-nudge-btn" onclick="doExport()">Export CSV</button><button class="export-nudge-x" onclick="dismissNudge()">✕</button></div>
+      <div class="export-nudge" id="export-nudge"><span class="export-nudge-ico">📦</span><div class="export-nudge-txt"><b>Worth backing up.</b>Save a copy — it's the only one.</div><button class="export-nudge-btn" onclick="doExport()">Back up now</button><button class="export-nudge-x" onclick="dismissNudge()">✕</button></div>
       <input class="lsearch" id="lsearch" placeholder="&#128269; Search expenses..." oninput="renderLog()">
       <div class="frow2" id="frow2"></div>
       <div class="vtog">
@@ -334,9 +304,10 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
       <div class="ssl">Backup &amp; Restore</div>
       <div class="warn-box"><b>&#9888; Keep your data safe:</b> Export weekly. If you open a <em>new copy</em> of this file, it starts empty &mdash; always use the same saved bookmark or home screen icon.<br><br><b>Import adds new expenses</b> &mdash; it won&#8217;t duplicate ones already here. It does not delete existing data.</div>
       <div class="ss">
-        <div class="sr" onclick="doExport()"><span class="srn">Export CSV (open in Excel)</span><span class="srv">&#8595; Save</span></div>
+        <div class="sr" onclick="doExport()"><span class="srn">Back up my purse</span><span class="srv">&#8595; Save file</span></div>
         <div class="sr" onclick="doJsonBackup()"><span class="srn">Backup code (mobile friendly)</span><span class="srv">&#128274; Safe</span></div>
-        <div class="sr" onclick="doImport()"><span class="srn">Import CSV (restore backup)</span><span class="srv">&#8593; Load</span></div>
+        <div class="sr" onclick="doImport()"><span class="srn">Restore from backup</span><span class="srv">&#8593; Select file</span></div>
+        <div class="sr" onclick="doExportCSV()"><span class="srn">Export CSV (Excel / Sheets)</span><span class="srv">&#8595; .csv</span></div>
 
       </div>
       <div class="ssl">About</div>
@@ -344,7 +315,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
       <div class="ss">
         <div class="sr"><span class="srn">Traveller</span><span class="srv" id="s-name">&mdash;</span></div>
         <div class="sr" onclick="toggleTheme()"><span class="srn">Light / Dark mode</span><span class="srv" id="s-theme">Light</span></div>
-        <div class="sr" onclick="openShareModal()"><span class="srn">Share with a fellow hobbit</span><span class="srv">&#8599;</span></div>
+        <div class="sr" onclick="openShareModal()"><span class="srn">Tell a fellow traveller</span><span class="srv">&#8599;</span></div>
         <div class="sr" onclick="clearExpenses()"><span class="srn" style="color:var(--err)">Clear all expenses</span><span class="srv">Keeps your profile</span></div>
         <div class="sr" onclick="newTrip()"><span class="srn" style="color:var(--err)">Start a new trip</span><span class="srv">Full reset</span></div>
       </div>
@@ -433,16 +404,14 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 </div></div>
 
 <div class="ovl" id="m-share"><div class="sheet"><div class="handle"></div>
-  <div class="stitle">Share with a fellow hobbit</div>
-  <div class="ssub">Send them <b>purse.html</b>. Their data stays on their device, completely separate from yours.</div>
-  <div style="background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:13px;font-size:.8rem;color:var(--ink2);line-height:1.9;margin-bottom:12px">
-    <b style="color:var(--pri)">Android:</b> Open in Chrome &#8594; &#8942; &#8594; Add to Home Screen<br>
-    <b style="color:var(--pri)">iPhone:</b> Open in Safari &#8594; Share &#8594; Add to Home Screen
-  </div>
-  <button class="btn btn-p" onclick="closeModal('m-share')">Got it</button>
+  <div class="stitle">Tell a fellow traveller</div>
+  <div class="ssub">Send them the link. They open it, add it to their home screen, and they&#8217;re off. Their data stays on their device, separate from yours.</div>
+  <div style="background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:13px;font-size:.82rem;color:var(--ink);font-weight:600;word-break:break-all;margin-bottom:12px">robvoyzey-pm.github.io/second-breakfast/second-breakfast.html</div>
+  <button class="btn btn-p" onclick="copyShareUrl()">Copy link</button>
+  <button class="btn btn-g" onclick="closeModal('m-share')">Done</button>
 </div></div>
 
-<input type="file" id="csv-input" accept=".csv" style="display:none" onchange="handleImport(event)">
+<input type="file" id="bk-input" accept=".json,.csv" style="display:none" onchange="handleImport(event)">
 
 <div class="ovl" id="m-backup"><div class="sheet"><div class="handle"></div>
   <div class="stitle">Backup Code</div>
@@ -555,6 +524,7 @@ function recalcEdit(){var inr=parseFloat(document.getElementById('e-inr').value)
 function saveEdit(){var inr=parseFloat(document.getElementById('e-inr').value);if(!inr||isNaN(inr)){showToast('Enter an amount');return}var idx=-1;for(var i=0;i<exps.length;i++){if(exps[i].id===selId){idx=i;break}}if(idx===-1)return;var orig=exps[idx],cat=catById(editCatId);var days=parseInt(document.getElementById('e-days').value)||0;exps[idx]={id:orig.id,date:normaliseDate(document.getElementById('e-date').value||orig.date),catId:cat.id,catName:cat.n,loc:document.getElementById('e-loc').value.trim(),inr:inr,aud:inr/orig.rate,days:days,note:document.getElementById('e-note').value.trim(),country:orig.country,local:orig.local,sym:orig.sym,flag:orig.flag,rate:orig.rate};persist();renderAll();fillDetail(exps[idx]);switchMode('detail');showToast('Updated \u2713')}
 function doDelete(){if(!confirm('Remove this expense?'))return;var n=[];for(var i=0;i<exps.length;i++){if(exps[i].id!==selId)n.push(exps[i])}exps=n;persist();renderAll();closeModal('m-exp');showToast('Removed')}
 function tapDay(d,amt){var notes=[];for(var i=0;i<exps.length;i++){var e=exps[i];if(e.days&&e.days>1&&dailyAud(e,d)>0){var dn=Math.round((new Date(d)-new Date(e.date))/864e5)+1;var lbl=(e.note||e.catName).split(' ')[0].toLowerCase().slice(0,6);notes.push(lbl+' '+dn+'/'+e.days);}}showToast(fH(amt)+(notes.length?' · '+notes.join(' · '):''));}
+function tapDay(d,amt){var parts=[];for(var i=0;i<exps.length;i++){var e=exps[i];if(e.days&&e.days>1){var share=dailyAud(e,d);if(share>0){var dn=Math.round((new Date(d)-new Date(e.date))/864e5)+1;parts.push((e.note||e.catName).slice(0,10)+' ('+dn+'/'+e.days+')');}}}var msg=fH(amt);if(parts.length)msg+=' — incl. '+parts.join(', ');showToast(msg);}
 function renderAll(){renderBudget();renderStats();renderRecent();renderLog();renderReports();updateSettings()}
 function dailyAud(e,d){var days=e.days&&e.days>1?e.days:0;if(!days)return e.date===d?e.aud:0;var share=e.aud/days;var start=new Date(e.date);for(var n=0;n<days;n++){var dd=new Date(start.getTime()+n*864e5).toISOString().split('T')[0];if(dd===d)return share;}return 0}
 function dailyAudForWeek(e,wn){var days=e.days&&e.days>1?e.days:0;if(!days)return wkNum(e.date)===wn?e.aud:0;var share=e.aud/days,total=0;var start=new Date(e.date);for(var n=0;n<days;n++){var dd=new Date(start.getTime()+n*864e5).toISOString().split('T')[0];if(wkNum(dd)===wn)total+=share;}return total}
@@ -562,7 +532,7 @@ function attributedToDate(d){var total=0;for(var i=0;i<exps.length;i++){var e=ex
 function renderBudget(){var wn=wkNum(today()),spent=0;for(var i=0;i<exps.length;i++){spent+=dailyAudForWeek(exps[i],wn)}var pct=Math.min(spent/cfg.budget*100,100),rem=cfg.budget-spent;var cls=pct>90?'over':pct>70?'warn':'ok';document.getElementById('budget-card').innerHTML='<div class="bwk">Week '+wn+' \u00B7 '+wkLabel(wn)+'</div><div class="brow"><div><div class="bamt">'+fH(spent)+'</div><div class="bof">of '+fH(cfg.budget)+' this week</div></div><div class="bpill bp-'+cls+'">'+(rem>=0?fH(rem)+' left':fH(-rem)+' over')+'</div></div><div class="bbar"><div class="bfill bf-'+cls+'" style="width:'+pct+'%"></div></div>'}
 function renderStats(){var t=today(),tod=0,tot=0;for(var i=0;i<exps.length;i++){tot+=exps[i].aud;tod+=dailyAud(exps[i],t)}var days=Math.max(1,Math.round((new Date(t)-new Date(cfg.tripStart))/864e5)+1);var dailyBudget=cfg.budget/7;var attributed=attributedToDate(t);var dailyAvg=attributed/days;document.getElementById('stats-row').innerHTML='<div class="stat"><div class="sv">'+fH(tod)+'</div><div class="sl">today</div></div>'+'<div class="stat"><div class="sv">'+fH(dailyAvg)+'</div><div class="sl-pair"><span class="sl">avg/day</span><span class="sl-budget">of '+fH(dailyBudget)+'</span></div></div>'+'<div class="stat"><div class="sv">'+fH(tot)+'</div><div class="sl">Day '+days+'</div></div>'}
 function eHTML(e){var c=catByName(e.catName);var loc=e.loc?' \u00B7 '+e.loc:'';var days=e.days||0;var unitLbl=e.isNight?'night':(e.catId===2?'night':'day');var pn=days>1?'<div class="epn">'+days+' '+unitLbl+(days!==1?'s':'')+' \u00B7 '+fH(e.aud/days)+'/'+unitLbl+'</div>':'';return'<div class="erow" onclick="openExp(\''+e.id+'\')"><div class="eico">'+c.e+'</div><div><div class="ecat">'+(e.note||c.n)+'</div><div class="emeta">'+e.date+loc+'</div></div><div class="eamts"><div class="einr">'+fL(e.inr,e.sym)+'</div><div class="eaud">'+fH(e.aud)+'</div>'+pn+'</div></div>'}
-function renderRecent(){var el=document.getElementById('recent');if(!exps.length){el.innerHTML='<div class="empty"><div class="empty-ico">\u{1F33F}</div><p>Your purse is empty. Add your first expense above.</p></div>';return}var h='';for(var i=0;i<Math.min(exps.length,5);i++)h+=eHTML(exps[i]);if(exps.length>5)h+='<div class="slink-row"><button class="slink" onclick="goView(\u0022log\u0022)">See all '+exps.length+' expenses →</button></div>';el.innerHTML=h}
+function renderRecent(){var el=document.getElementById('recent');if(!exps.length){el.innerHTML='<div class="empty"><div class="empty-ico">\u{1F33F}</div><p>Your purse is empty. Add your first expense above.</p></div>';return}var h='';for(var i=0;i<Math.min(exps.length,5);i++)h+=eHTML(exps[i]);if(exps.length>5)h+='<div class="slink-row"><button class="slink" onclick="goView(\'log\')">'+'See all '+exps.length+' expenses →</button></div>';el.innerHTML=h}
 
 function renderExportNudge(){var n=document.getElementById('export-nudge');if(!n)return;if(exps.length>=10){var dismissed=localStorage.getItem('sb-nudge-dismissed');var dKey='sb-nudge-week-'+Math.floor(Date.now()/(7*864e5*1000));if(!dismissed||dismissed!==dKey){n.style.display='flex';n.setAttribute('data-key',dKey);}else{n.style.display='none';}}else{n.style.display='none';}}
 function dismissNudge(){var n=document.getElementById('export-nudge');if(n){localStorage.setItem('sb-nudge-dismissed',n.getAttribute('data-key'));n.style.display='none';}}
@@ -587,42 +557,88 @@ function openBudgetModal(){document.getElementById('b-val').value=cfg.budget;doc
 function saveBudget(){var b=parseFloat(document.getElementById('b-val').value);if(!b||b<=0)return;cfg.budget=b;persist();renderAll();updateSettings();closeModal('m-budget');showToast('Budget: '+fH(b)+'/week')}
 function openStartModal(){document.getElementById('ts-date').value=cfg.tripStart;openModal('m-start')}
 function saveStart(){var d=document.getElementById('ts-date').value;if(!d)return;cfg.tripStart=d;persist();renderAll();updateSettings();closeModal('m-start');showToast('Trip start updated')}
-function openShareModal(){openModal('m-share')}
+function openShareModal(){openModal('m-share');}
+function copyShareUrl(){var url='https://robvoyzey-pm.github.io/second-breakfast/second-breakfast.html';if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){showToast('Link copied ✓');});}else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Link copied ✓');}}
 function openCustomCatModal(){renderCCList();openModal('m-customcat')}
 function renderCCList(){var cc=cfg.customCats||[],html='';if(!cc.length)html='<div style="font-size:.78rem;color:var(--ink3);padding:8px 0">No custom categories yet.</div>';else for(var i=0;i<cc.length;i++)html+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bord)"><span>'+cc[i].e+' '+cc[i].n+'</span><button onclick="delCC('+cc[i].id+')" style="background:none;border:none;color:var(--err);cursor:pointer;padding:4px 8px;font-size:.8rem">Remove</button></div>';document.getElementById('ccat-list').innerHTML=html}
-function addCustomCat(){var name=document.getElementById('ccat-n').value.trim();var emoji=document.getElementById('ccat-e').value.trim()||'\u2B50';if(!name){showToast('Enter a name');return}if(!cfg.customCats)cfg.customCats=[];cfg.customCats.push({id:200+cfg.customCats.length,n:name,e:emoji,kw:[name.toLowerCase()]});document.getElementById('ccat-n').value='';document.getElementById('ccat-e').value='';persist();renderCCList();updateSettings();showToast('Added: '+emoji+' '+name)}
+function addCustomCat(){var name=document.getElementById('ccat-n').value.trim();var emoji=document.getElementById('ccat-e').value.trim()||'🏊';if(!name){showToast('Enter a name');return}if(!cfg.customCats)cfg.customCats=[];cfg.customCats.push({id:200+cfg.customCats.length,n:name,e:emoji,kw:[name.toLowerCase()]});document.getElementById('ccat-n').value='';document.getElementById('ccat-e').value='';persist();renderCCList();updateSettings();showToast('Added: '+emoji+' '+name)}
 function delCC(id){cfg.customCats=(cfg.customCats||[]).filter(function(c){return c.id!==id});persist();renderCCList();updateSettings();renderAll()}
-function doExport(){if(!exps.length){showToast('Nothing to export yet');return}var cols=['Date','Week','Country','Category','Location',cfg.profile.local+' Amount',cfg.homeCur+' Amount','Per-Unit','Days','Note','Rate','Currency','Symbol','Flag'];var rows=[cols];for(var i=0;i<exps.length;i++){var e=exps[i],days=e.days||0;rows.push([e.date,'Week '+wkNum(e.date),e.country||'',e.catName,e.loc||'',e.inr,e.aud.toFixed(4),days>1?(e.aud/days).toFixed(4):'',days,e.note||'',e.rate||cfg.profile.rate,e.local||cfg.profile.local,e.sym||cfg.profile.sym,e.flag||''])}var csv='\uFEFF';for(var i=0;i<rows.length;i++){var parts=[];for(var j=0;j<rows[i].length;j++)parts.push('"'+String(rows[i][j]).replace(/"/g,'""')+'"');csv+=parts.join(',')+'\r\n'}var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});var filename='second-breakfast-'+today()+'.csv';if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],filename,{type:'text/csv'})]})){var file=new File([blob],filename,{type:'text/csv'});navigator.share({files:[file],title:'Second Breakfast Backup',text:'Your expense backup \u2014 '+today()}).catch(function(){});return;}var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(a.href)},5000);showToast('Saved! Open in Excel or Google Sheets.')}
+function doExport(){
+  if(!exps.length){showToast('Nothing to back up yet');return;}
+  var data=JSON.stringify({v:2,exported:today(),cfg:cfg,exps:exps});
+  var blob=new Blob([data],{type:'application/json'});
+  var filename='second-breakfast-'+today()+'.json';
+  var file=new File([blob],filename,{type:'application/json'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+    navigator.share({files:[file],title:'Second Breakfast Backup — '+today()}).catch(function(err){if(err.name!=='AbortError')_dlFile(blob,filename);});
+  }else{_dlFile(blob,filename);}
+}
+function _dlFile(blob,filename){
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href);},5000);
+  showToast('Saved — keep this file safe ✓');
+}
+function doExportCSV(){if(!exps.length){showToast('Nothing to export yet');return;}var cols=['Date','Week','Country','Category','Location',cfg.profile.local+' Amount',cfg.homeCur+' Amount','Per-Unit','Days','Note','Rate','Currency','Symbol','Flag'];var rows=[cols];for(var i=0;i<exps.length;i++){var e=exps[i],days=e.days||0;rows.push([e.date,'Week '+wkNum(e.date),e.country||'',e.catName,e.loc||'',e.inr,e.aud.toFixed(4),days>1?(e.aud/days).toFixed(4):'',days,e.note||'',e.rate||cfg.profile.rate,e.local||cfg.profile.local,e.sym||cfg.profile.sym,e.flag||'']);}var csv='﻿';for(var i=0;i<rows.length;i++){var parts=[];for(var j=0;j<rows[i].length;j++)parts.push('"'+String(rows[i][j]).replace(/"/g,'""')+'"');csv+=parts.join(',')+'';}_dlFile(new Blob([csv],{type:'text/csv;charset=utf-8'}),'second-breakfast-'+today()+'.csv');}
+
+
 function doJsonBackup(){if(!exps.length){showToast('Nothing to back up yet');return}var data=JSON.stringify({cfg:cfg,exps:exps});if(navigator.share&&navigator.canShare){navigator.share({text:data,title:'Second Breakfast Backup'}).catch(function(){});return;}document.getElementById('bk-text').value=data;openModal('m-backup');showToast('Copy this code somewhere safe')}
 function doJsonRestore(){var raw=document.getElementById('bk-text').value.trim();if(!raw){showToast('Paste your backup code first');return}try{var d=JSON.parse(raw);if(d.cfg)cfg=Object.assign({name:'',tripStart:today(),budget:1000,homeCur:'AUD',theme:'light',lastLoc:'',customCats:[],catOverrides:{}},d.cfg);if(d.exps&&d.exps.length){exps=d.exps;exps.sort(function(a,b){return b.date.localeCompare(a.date)});}persist();renderAll();closeModal('m-backup');showToast('Restored '+exps.length+' expenses')}catch(e){showToast('Invalid backup code')}}
-function doImport(){document.getElementById('csv-input').click()}
-function handleImport(ev){var file=ev.target.files[0];if(!file)return;var r=new FileReader();r.onload=function(e){try{var text=e.target.result.replace(/^\uFEFF/,'');var lines=text.trim().split(/\r?\n/).slice(1);var count=0;for(var i=0;i<lines.length;i++){var line=lines[i],cols=[],cur='',inQ=false;for(var k=0;k<=line.length;k++){var ch=line[k];if(inQ&&ch==='"'&&line[k+1]==='"'){cur+='"';k++}else if(ch==='"'){inQ=!inQ}else if((ch===','||k===line.length)&&!inQ){cols.push(cur);cur=''}else{cur+=(ch||'')}}var date=normaliseDate(cols[0]),country=cols[2]||'',catName=cols[3]||'Other',loc=cols[4]||'';var inr=cols[5]===''?0:parseFloat(cols[5]);if(isNaN(inr))inr=0;var aud=parseFloat(cols[6])||0,days=parseInt(cols[8])||0,note=cols[9]||'',rate=parseFloat(cols[10])||cfg.profile.rate,local=cols[11]||cfg.profile.local,sym=cols[12]||cfg.profile.sym,flag=cols[13]||'\u{1F30D}';if(!date)continue;var dup=false;for(var j=0;j<exps.length;j++){if(exps[j].date===date&&exps[j].catName===catName&&Math.abs(exps[j].inr-inr)<0.01){dup=true;break}}if(dup)continue;exps.push({id:date+catName+inr+Math.random(),date:date,catId:catByName(catName).id,catName:catName,country:country,flag:flag,loc:loc,inr:inr,aud:aud,days:days,note:note,rate:rate,local:local,sym:sym});count++}exps.sort(function(a,b){return b.date.localeCompare(a.date)});persist();renderAll();showToast('Restored '+count+' expense'+(count!==1?'s':''))}catch(err){showToast('Import failed')}};r.readAsText(file);ev.target.value=''}
-
+function doImport(){document.getElementById('bk-input').click()}
+function handleImport(ev){
+  var file=ev.target.files[0];if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var text=e.target.result;
+      if(text.trim().charAt(0)==='{'){
+        var d=JSON.parse(text);
+        if(!d.exps||!d.exps.length){showToast('No expenses found in backup');return;}
+        var count=0;
+        for(var i=0;i<d.exps.length;i++){
+          var ne=d.exps[i],dup=false;
+          for(var j=0;j<exps.length;j++){
+            if(exps[j].id===ne.id||(exps[j].date===ne.date&&exps[j].catName===ne.catName&&Math.abs((exps[j].inr||0)-(ne.inr||0))<0.01)){dup=true;break;}
+          }
+          if(!dup){exps.push(ne);count++;}
+        }
+        exps.sort(function(a,b){return b.date.localeCompare(a.date);});
+        persist();renderAll();
+        showToast('Restored '+count+' expense'+(count!==1?'s':'')+' \u2713');
+        return;
+      }
+      text=text.replace(/^\uFEFF/,'');
+      var lines=text.trim().split(/\r?\n/).slice(1),count=0;
+      for(var i=0;i<lines.length;i++){
+        var line=lines[i],cols=[],cur='',inQ=false;
+        for(var k=0;k<=line.length;k++){var ch=line[k];if(inQ&&ch==='"'&&line[k+1]==='"'){cur+='"';k++;}else if(ch==='"'){inQ=!inQ;}else if((ch===','||k===line.length)&&!inQ){cols.push(cur);cur='';}else{cur+=(ch||'');}}
+        var date=normaliseDate(cols[0]),country=cols[2]||'',catName=cols[3]||'Other',loc=cols[4]||'';
+        var inr=cols[5]===''?0:parseFloat(cols[5]);if(isNaN(inr))inr=0;
+        var aud=parseFloat(cols[6])||0,days=parseInt(cols[8])||0,note=cols[9]||'',rate=parseFloat(cols[10])||cfg.profile.rate,local=cols[11]||cfg.profile.local,sym=cols[12]||cfg.profile.sym,flag=cols[13]||'\U0001F30D';
+        if(!date)continue;
+        var dup=false;
+        for(var j=0;j<exps.length;j++){if(exps[j].date===date&&exps[j].catName===catName&&Math.abs(exps[j].inr-inr)<0.01){dup=true;break;}}
+        if(dup)continue;
+        exps.push({id:date+catName+inr+Math.random(),date:date,catId:catByName(catName).id,catName:catName,country:country,flag:flag,loc:loc,inr:inr,aud:aud,days:days,note:note,rate:rate,local:local,sym:sym});count++;
+      }
+      exps.sort(function(a,b){return b.date.localeCompare(a.date);});
+      persist();renderAll();
+      showToast('Restored '+count+' expense'+(count!==1?'s':'')+' \u2713');
+    }catch(err){showToast('Restore failed \u2014 is this a Second Breakfast backup?');}
+  };
+  r.readAsText(file);ev.target.value='';
+}
 function closeAllModals(){var ovls=document.querySelectorAll('.ovl');for(var i=0;i<ovls.length;i++)ovls[i].classList.remove('on')}
 function clearExpenses(){if(!confirm('Remove all expenses? Your profile and settings are kept.'))return;exps=[];persist();closeAllModals();renderAll();goView('add');showToast('All expenses cleared')}
 function newTrip(){if(!confirm('Start a new trip? This clears everything and returns to setup.'))return;exps=[];cfg={name:'',tripStart:'',budget:1000,homeCur:'AUD',theme:cfg.theme,lastLoc:'',customCats:[],profile:{country:'India',local:'INR',sym:'\u20B9',flag:'\u{1F1EE}\u{1F1F3}',rate:64.14}};persist();closeAllModals();clearCC();document.getElementById('app').classList.remove('on');var fields={'ob-name':'','ob-start':today(),'ob-budget':'1000','ob-home':'AUD','ob-country':'India','ob-local':'INR','ob-rate':'64.14'};Object.keys(fields).forEach(function(id){var el=document.getElementById(id);if(el)el.value=fields[id]});document.getElementById('ob').classList.add('on');showToast('Ready for a new adventure')}
 function goView(name){var views=document.querySelectorAll('.view'),nbs=document.querySelectorAll('.nb');for(var i=0;i<views.length;i++)views[i].classList.remove('on');for(var i=0;i<nbs.length;i++)nbs[i].classList.remove('on');document.getElementById('v-'+name).classList.add('on');document.getElementById('nb-'+name).classList.add('on');if(name==='add'){setTimeout(function(){var qi=document.getElementById('qinput');if(qi)qi.focus();},120);}if(name==='log'){renderLog();renderExportNudge();}if(name==='reports')renderReports();window.scrollTo({top:0,behavior:'smooth'})}
 function setYesterday(){var y=new Date();y.setDate(y.getDate()-1);document.getElementById('cc-date').value=y.toISOString().split('T')[0];}
 function normaliseDate(d){if(!d)return today();var s=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;var parts=s.split(/[\/\-\.\s]+/);if(parts.length>=3){var a=parts[0],b=parts[1],c=parts[2];if(a.length===4)return a+'-'+b.padStart(2,'0')+'-'+c.padStart(2,'0');if(c.length===4)return c+'-'+b.padStart(2,'0')+'-'+a.padStart(2,'0');}var dt=new Date(s);if(!isNaN(dt.getTime()))return dt.toISOString().split('T')[0];return today()}
-
 var _dp=null;
-window.addEventListener('beforeinstallprompt',function(e){
-  e.preventDefault();_dp=e;
-  var nb=document.getElementById('install-native-btn');
-  var mb=document.getElementById('install-manual-btn');
-  if(nb)nb.style.display='block';
-  if(mb)mb.style.display='none';
-});
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();_dp=e;var nb=document.getElementById('install-native-btn');var mb=document.getElementById('install-manual-btn');if(nb)nb.style.display='block';if(mb)mb.style.display='none';});
 function isStandalone(){return window.navigator.standalone===true||window.matchMedia('(display-mode:standalone)').matches;}
 function detectPlatform(){var ua=navigator.userAgent;if(/iphone|ipad|ipod/i.test(ua))return'ios';if(/android/i.test(ua))return'android';return'other';}
-function showInstallScreen(){
-  if(isStandalone()){installDone();return;}
-  var p=detectPlatform();
-  var el=document.getElementById('install-'+p);
-  if(el)el.style.display='block';
-  document.getElementById('ob-install').classList.add('on');
-  document.getElementById('ob').classList.remove('on');
-}
+function showInstallScreen(){if(isStandalone()){installDone();return;}var p=detectPlatform();var el=document.getElementById('install-'+p);if(el)el.style.display='block';document.getElementById('ob-install').classList.add('on');document.getElementById('ob').classList.remove('on');}
 function doNativeInstall(){if(_dp){_dp.prompt();_dp.userChoice.then(function(r){_dp=null;if(r.outcome==='accepted')installDone();});}}
 function installDone(){document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');}
 function installSkip(){document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');}
