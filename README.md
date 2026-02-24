@@ -10,7 +10,7 @@ Single-file offline PWA expense tracker for long-term travellers.
 - Multi-night accommodation spread
 - Works offline forever
 
-**[Open the purse →](https://[your-username].github.io/second-breakfast/second-breakfast.html)**
+**[Open the purse →](https://robvoyzey-pm.github.io/second-breakfast/second-breakfast.html)**
 
 ---
 
