@@ -27,10 +27,11 @@
       <h2 style="text-align:center;margin-bottom:8px">Add to your home screen first</h2>
       <p style="text-align:center;margin-bottom:20px">One tap away while you travel. Much better than remembering a URL at a chai stall.</p>
       <div id="install-ios" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)">
-        <b style="color:var(--ink);display:block;margin-bottom:6px">📱 On iPhone (Safari only):</b>
-        1. Tap the <b>Share</b> button at the bottom ↑<br>
+        <b style="color:var(--ink);display:block;margin-bottom:6px">📱 On iPhone — open in Safari first:</b>
+        1. Tap the <b>Share</b> button ↑ at the bottom of Safari<br>
         2. Scroll down and tap <b>Add to Home Screen</b><br>
-        3. Tap <b>Add</b> — done ✓
+        3. Tap <b>Add</b> in the top right — done ✓<br>
+        <span style="font-size:.72rem;color:var(--ink3);margin-top:4px;display:block">Must be Safari — Chrome on iPhone cannot add to home screen</span>
       </div>
       <div id="install-android" style="display:none;background:var(--bg3);border:1px solid var(--bord);border-radius:var(--rs);padding:14px;margin-bottom:14px;font-size:.82rem;line-height:2;color:var(--ink2)">
         <b style="color:var(--ink);display:block;margin-bottom:6px">📱 On Android (Chrome):</b>
@@ -42,7 +43,10 @@
         <b style="color:var(--ink);display:block;margin-bottom:6px">📱 Add to your home screen:</b>
         In your browser menu, look for <b>"Add to Home Screen"</b> or <b>"Install app"</b>.
       </div>
-      <button class="btn btn-p" onclick="installDone()" style="margin-top:6px;padding:16px;font-size:1rem">I've added it — let's set up ✓</button>
+      <!-- Native Chrome/Android prompt button — shown when beforeinstallprompt fires -->
+      <button id="install-native-btn" class="btn btn-p" onclick="doNativeInstall()" style="display:none;margin-top:6px;padding:16px;font-size:1rem">Add to Home Screen ↓</button>
+      <!-- Manual instructions fallback — shown for iOS Safari and others -->
+      <button id="install-manual-btn" class="btn btn-p" onclick="installDone()" style="margin-top:6px;padding:16px;font-size:1rem">I've added it — let's set up ✓</button>
       <button class="btn btn-g" onclick="installSkip()" style="margin-top:8px;font-size:.85rem;color:var(--ink3)">Skip — I'll do it later</button>
     </div>
   </div>
@@ -219,6 +223,21 @@ function goView(name){var views=document.querySelectorAll('.view'),nbs=document.
 function setYesterday(){var y=new Date();y.setDate(y.getDate()-1);document.getElementById('cc-date').value=y.toISOString().split('T')[0];}
 function normaliseDate(d){if(!d)return today();var s=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;var parts=s.split(/[\/\-\.\s]+/);if(parts.length>=3){var a=parts[0],b=parts[1],c=parts[2];if(a.length===4)return a+'-'+b.padStart(2,'0')+'-'+c.padStart(2,'0');if(c.length===4)return c+'-'+b.padStart(2,'0')+'-'+a.padStart(2,'0');}var dt=new Date(s);if(!isNaN(dt.getTime()))return dt.toISOString().split('T')[0];return today()}
 
+var _deferredPrompt=null;
+// Catch Chrome/Android native install prompt
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();
+  _deferredPrompt=e;
+  // If install screen is showing, update button to use native prompt
+  var nb=document.getElementById('install-native-btn');
+  if(nb){nb.style.display='block';}
+  var mb=document.getElementById('install-manual-btn');
+  if(mb){mb.style.display='none';}
+});
+// Detect if already installed as PWA
+function isStandalone(){
+  return window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
+}
 function detectPlatform(){
   var ua=navigator.userAgent;
   if(/iphone|ipad|ipod/i.test(ua))return'ios';
@@ -226,10 +245,21 @@ function detectPlatform(){
   return'other';
 }
 function showInstallScreen(){
+  // If already on home screen, skip install prompt entirely
+  if(isStandalone()){installDone();return;}
   var p=detectPlatform();
   document.getElementById('install-'+p).style.display='block';
   document.getElementById('ob-install').classList.add('on');
   document.getElementById('ob').classList.remove('on');
+}
+function doNativeInstall(){
+  if(_deferredPrompt){
+    _deferredPrompt.prompt();
+    _deferredPrompt.userChoice.then(function(r){
+      _deferredPrompt=null;
+      if(r.outcome==='accepted'){installDone();}
+    });
+  }
 }
 function installDone(){
   document.getElementById('ob-install').classList.remove('on');
