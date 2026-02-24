@@ -412,6 +412,12 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 </div></div>
 
 <input type="file" id="bk-input" accept=".json,.csv" style="display:none" onchange="handleImport(event)">
+
+<div class="ovl" id="m-day"><div class="sheet"><div class="handle"></div>
+  <div class="stitle" id="day-date"></div>
+  <div id="day-body" style="margin-bottom:16px"></div>
+  <button class="btn btn-g" onclick="closeModal('m-day')" style="margin-top:0">Close</button>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -516,25 +522,60 @@ function recalcEdit(){var inr=parseFloat(document.getElementById('e-inr').value)
 function saveEdit(){var inr=parseFloat(document.getElementById('e-inr').value);if(!inr||isNaN(inr)){showToast('Enter an amount');return}var idx=-1;for(var i=0;i<exps.length;i++){if(exps[i].id===selId){idx=i;break}}if(idx===-1)return;var orig=exps[idx],cat=catById(editCatId);var days=parseInt(document.getElementById('e-days').value)||0;exps[idx]={id:orig.id,date:normaliseDate(document.getElementById('e-date').value||orig.date),catId:cat.id,catName:cat.n,loc:document.getElementById('e-loc').value.trim(),inr:inr,aud:inr/orig.rate,days:days,note:document.getElementById('e-note').value.trim(),country:orig.country,local:orig.local,sym:orig.sym,flag:orig.flag,rate:orig.rate};persist();renderAll();fillDetail(exps[idx]);switchMode('detail');showToast('Updated \u2713')}
 function doDelete(){if(!confirm('Remove this expense?'))return;var n=[];for(var i=0;i<exps.length;i++){if(exps[i].id!==selId)n.push(exps[i])}exps=n;persist();renderAll();closeModal('m-exp');showToast('Removed')}
 function tapDay(d,amt){
-  var carried=0,carriedFrom=[];
+  if(amt===0){showToast('Nothing logged for this day');return;}
+  var dl=new Date(d).toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('day-date').textContent=dl;
+
+  // Gather carried items (multi-night/day splits)
+  var carried=0,carryItems=[];
   for(var i=0;i<exps.length;i++){
     var e=exps[i];
     if(e.days&&e.days>1){
       var share=dailyAud(e,d);
-      if(share>0){carried+=share;carriedFrom.push(e.note||e.catName);}
+      if(share>0){
+        var dn=Math.round((new Date(d)-new Date(e.date))/864e5)+1;
+        var unitLbl=e.isNight||e.catId===2?'night':'day';
+        carryItems.push({label:e.note||e.catName,share:share,dn:dn,days:e.days,unitLbl:unitLbl,sym:e.sym||cfg.profile.sym,cat:e.catId});
+        carried+=share;
+      }
     }
   }
   var direct=amt-carried;
-  var msg='';
-  if(carried>0&&direct>0){
-    msg=fH(amt)+' today · '+fH(carried)+' carried from '+(carriedFrom[0]||'split cost');
-  } else if(carried>0){
-    msg=fH(amt)+' today · all carried from '+(carriedFrom[0]||'split cost');
-  } else {
-    msg=fH(amt)+' today';
+
+  // Build body HTML
+  var html='<div style="border:1px solid var(--bord);border-radius:var(--rs);overflow:hidden;margin-bottom:12px">';
+
+  // Direct spend row
+  if(direct>0){
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:'+(carryItems.length?'1px solid var(--bord)':'none')+'">';
+    html+='<div><div style="font-size:.82rem;font-weight:700;color:var(--ink)">Spent today</div>';
+    html+='<div style="font-size:.68rem;color:var(--ink3);margin-top:2px">logged this day</div></div>';
+    html+='<div style="font-family:Georgia,serif;font-size:1rem;font-weight:700;color:var(--ink)">'+fH(direct)+'</div></div>';
   }
-  showToast(msg);
+
+  // Each carried item
+  for(var i=0;i<carryItems.length;i++){
+    var ci=carryItems[i];
+    var isLast=i===carryItems.length-1;
+    var c=catById(ci.cat);
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:'+(isLast?'none':'1px solid var(--bord)')+'">';
+    html+='<div style="display:flex;align-items:center;gap:10px">';
+    html+='<div style="font-size:1.1rem">'+c.e+'</div>';
+    html+='<div><div style="font-size:.82rem;font-weight:700;color:var(--ink)">'+ci.label+'</div>';
+    html+='<div style="font-size:.68rem;color:var(--ink3);margin-top:2px">'+ci.unitLbl+' '+ci.dn+' of '+ci.days+'</div></div></div>';
+    html+='<div style="font-family:Georgia,serif;font-size:1rem;font-weight:700;color:var(--ink2)">'+fH(ci.share)+'</div></div>';
+  }
+  html+='</div>';
+
+  // Total row
+  html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 2px">';
+  html+='<div style="font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3)">Total this day</div>';
+  html+='<div style="font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--ink)">'+fH(amt)+'</div></div>';
+
+  document.getElementById('day-body').innerHTML=html;
+  openModal('m-day');
 }
+
 
 function renderAll(){renderBudget();renderStats();renderRecent();renderLog();renderReports();updateSettings()}
 function dailyAud(e,d){var days=e.days&&e.days>1?e.days:0;if(!days)return e.date===d?e.aud:0;var share=e.aud/days;var start=new Date(e.date);for(var n=0;n<days;n++){var dd=new Date(start.getTime()+n*864e5).toISOString().split('T')[0];if(dd===d)return share;}return 0}
