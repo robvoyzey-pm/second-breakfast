@@ -189,6 +189,8 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 .export-nudge-txt b{color:var(--ink);display:block;margin-bottom:2px}
 .export-nudge-btn{background:var(--pri);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:.68rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .export-nudge-x{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:1rem;padding:0 4px;flex-shrink:0}
+.update-banner{display:none;align-items:center;justify-content:space-between;gap:10px;background:var(--okbg);border:1px solid var(--ok);border-radius:8px;padding:10px 14px;margin:8px 13px 0;font-size:.78rem;color:var(--ok);font-weight:600;position:relative;z-index:5;}
+.update-banner-btn{background:var(--ok);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:.76rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .cad-btn{flex:1;padding:8px 4px;background:var(--surf);border:1.5px solid var(--bord);border-radius:8px;font-family:inherit;font-size:.76rem;font-weight:700;color:var(--ink2);cursor:pointer;text-align:center;transition:all .15s}
 .cad-btn.on{background:var(--bg2);border-color:var(--pri);color:var(--pri)}
 .fetch-rate-btn{padding:11px 14px;background:var(--surf);border:1.5px solid var(--bord);border-radius:var(--rs);font-family:inherit;font-size:.76rem;font-weight:700;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
@@ -234,6 +236,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
       <div class="prof-pill" onclick="openProfileModal()" id="hdr-pill">&#127470;&#127475; INR</div>
     </div>
   </div>
+  <div class="update-banner" id="update-banner"><span>✦ An update is available</span><button class="update-banner-btn" onclick="doUpdate()">Refresh now</button></div>
   <div class="body">
     <div class="view on" id="v-add">
       <div class="card" id="budget-card"></div>
@@ -322,7 +325,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 
       </div>
       <div class="ssl">About</div>
-      <div style="padding:10px 14px 4px;font-size:.6rem;color:var(--ink3);letter-spacing:.06em;">© 2026 Second Breakfast · Built by Rob Voyzey</div>
+      <div style="padding:10px 14px 4px;font-size:.6rem;color:var(--ink3);letter-spacing:.06em;">© 2026 Second Breakfast · Built by Rob Voyzey · <span id='s-version'></span></div>
       <div class="ss">
         <div class="sr"><span class="srn">Traveller</span><span class="srv" id="s-name">&mdash;</span></div>
         <div class="sr" onclick="toggleTheme()"><span class="srn">Light / Dark mode</span><span class="srv" id="s-theme">Light</span></div>
@@ -455,6 +458,7 @@ window.addEventListener('beforeunload',function(){
 });
 function gc(path,title){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:path+'/'+_uid,title:title||path,event:true});}}catch(e){}}
 var SK='sb_v1';
+var APP_VERSION='1.1';
 var CATS=[
   {id:0,n:'Food & Drink',e:'\u{1F35B}',kw:[
     'food','eat','ate','meal','lunch','dinner','breakfast','brunch','supper','snack','buffet','set meal','tasting menu',
@@ -538,7 +542,7 @@ function allDays(){var days=[],s=new Date(cfg.tripStart),e=new Date(today());for
 function symFor(l){return CSYMS[l]||l}
 function flagFor(l){var m={INR:'\u{1F1EE}\u{1F1F3}',NPR:'\u{1F1F3}\u{1F1F5}',LKR:'\u{1F1F1}\u{1F1F0}',THB:'\u{1F1F9}\u{1F1ED}',USD:'\u{1F1FA}\u{1F1F8}',EUR:'\u{1F1EA}\u{1F1FA}',GBP:'\u{1F1EC}\u{1F1E7}',AUD:'\u{1F1E6}\u{1F1FA}',NZD:'\u{1F1F3}\u{1F1FF}'};return m[l]||'\u{1F30D}'}
 function finishSetup(){gc('onboarding-completed','Onboarding completed');var name=document.getElementById('ob-name').value.trim();var start=document.getElementById('ob-start').value||today();var budget=parseFloat(document.getElementById('ob-budget').value)||1000;var home=(document.getElementById('ob-home').value||'AUD').toUpperCase();var country=document.getElementById('ob-country').value.trim()||'India';var local=(document.getElementById('ob-local').value||'INR').toUpperCase();var rate=parseFloat(document.getElementById('ob-rate').value)||64.14;var _bdays=_obCadence==='custom'?(parseInt(document.getElementById('ob-budget-days').value)||7):7;cfg={name:name,tripStart:start,budget:budget,budgetCadence:_obCadence,budgetDays:_bdays,homeCur:home,theme:'light',lastLoc:'',customCats:[],profile:{country:country,local:local,sym:symFor(local),flag:CFLAGS[country.toLowerCase()]||flagFor(local),rate:rate}};persist();launchApp()}
-function launchApp(){if(exps.length>0){gc('session-start','Session start');var _wn=wkNum(today());var _wk=localStorage.getItem('sb_wtrack')||'0';var _wkn=parseInt(_wk);if(_wn>=2&&_wkn<2){localStorage.setItem('sb_wtrack','2');gc('week-2-active','Week 2 active');}if(_wn>=4&&_wkn<4){localStorage.setItem('sb_wtrack','4');gc('week-4-active','Week 4 active');}};document.getElementById('ob').classList.remove('on');document.getElementById('ob-install').classList.remove('on');document.getElementById('app').classList.add('on');document.getElementById('cc-date').value=today();document.getElementById('cc-hclbl').textContent=cfg.homeCur;document.getElementById('cc-sym').textContent=cfg.profile.sym;document.getElementById('e-hclbl').textContent=cfg.homeCur;applyTheme();updateHeader();updateSettings();renderAll();clearCC();goView('add')}
+function launchApp(){if(exps.length>0){gc('session-start','Session start');var _wn=wkNum(today());var _wk=localStorage.getItem('sb_wtrack')||'0';var _wkn=parseInt(_wk);if(_wn>=2&&_wkn<2){localStorage.setItem('sb_wtrack','2');gc('week-2-active','Week 2 active');}if(_wn>=4&&_wkn<4){localStorage.setItem('sb_wtrack','4');gc('week-4-active','Week 4 active');}};document.getElementById('ob').classList.remove('on');document.getElementById('ob-install').classList.remove('on');document.getElementById('app').classList.add('on');document.getElementById('cc-date').value=today();document.getElementById('cc-hclbl').textContent=cfg.homeCur;document.getElementById('cc-sym').textContent=cfg.profile.sym;document.getElementById('e-hclbl').textContent=cfg.homeCur;applyTheme();updateHeader();updateSettings();renderAll();clearCC();goView('add');checkForUpdate();}
 function updateHeader(){document.getElementById('hdr-pill').textContent=cfg.profile.flag+' '+cfg.profile.local}
 function autoFlag(){var c=document.getElementById('p-country').value.trim().toLowerCase();var f=CFLAGS[c];if(f)document.getElementById('p-flag').value=f}
 function autoSym(){var l=(document.getElementById('p-local').value||'').toUpperCase();var s=symFor(l);if(s!==l)document.getElementById('p-sym').value=s}
@@ -673,7 +677,7 @@ function updateSettings(){var p=cfg.profile;document.getElementById('s-country')
     if(daysSince>7)rateAge=' · ⚠️ '+daysSince+'d ago';
     else rateAge=' · ✓ fresh';
   }
-  document.getElementById('s-rate').textContent='1 '+cfg.homeCur+' = '+p.sym+p.rate+rateAge;document.getElementById('s-budget').textContent=fH(cfg.budget)+cadenceLabel();var tbEl=document.getElementById('s-totalbudget');if(tbEl)tbEl.textContent=(cfg.totalBudget&&cfg.totalBudget>0)?fH(cfg.totalBudget):'Not set';document.getElementById('s-start').textContent=cfg.tripStart;document.getElementById('s-name').textContent=cfg.name||'\u2014';var cc=cfg.customCats||[];document.getElementById('s-cc').textContent=cc.length?cc.map(function(c){return c.e+' '+c.n}).join(', '):'None';applyTheme()}
+  document.getElementById('s-rate').textContent='1 '+cfg.homeCur+' = '+p.sym+p.rate+rateAge;document.getElementById('s-budget').textContent=fH(cfg.budget)+cadenceLabel();var tbEl=document.getElementById('s-totalbudget');if(tbEl)tbEl.textContent=(cfg.totalBudget&&cfg.totalBudget>0)?fH(cfg.totalBudget):'Not set';var vEl=document.getElementById('s-version');if(vEl)vEl.textContent='v'+APP_VERSION;document.getElementById('s-start').textContent=cfg.tripStart;document.getElementById('s-name').textContent=cfg.name||'\u2014';var cc=cfg.customCats||[];document.getElementById('s-cc').textContent=cc.length?cc.map(function(c){return c.e+' '+c.n}).join(', '):'None';applyTheme()}
 function openModal(id){document.getElementById(id).classList.add('on')}
 function closeModal(id){document.getElementById(id).classList.remove('on')}
 var _ovls=document.querySelectorAll('.ovl');for(var _i=0;_i<_ovls.length;_i++){_ovls[_i].addEventListener('click',(function(o){return function(e){if(e.target===o)o.classList.remove('on')}}(_ovls[_i])))}
@@ -721,6 +725,22 @@ function fetchRate(ctx){var home=cfg.homeCur||'AUD';var localField=ctx==='ob'?do
 function openTotalBudgetModal(){document.getElementById('tb-val').value=cfg.totalBudget||'';document.getElementById('tb-hclbl').textContent=cfg.homeCur;openModal('m-totalbudget');}
 function saveTotalBudget(){var v=parseFloat(document.getElementById('tb-val').value)||0;cfg.totalBudget=v;persist();renderAll();updateSettings();closeModal('m-totalbudget');showToast(v>0?'Total budget set: '+fH(v):'Total budget cleared');}
 function clearTotalBudget(){cfg.totalBudget=0;persist();renderAll();updateSettings();closeModal('m-totalbudget');showToast('Total budget cleared');}
+function checkForUpdate(){
+  try{
+    fetch('version.json?v='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d&&d.version&&d.version!==APP_VERSION){
+        var b=document.getElementById('update-banner');
+        if(b)b.style.display='flex';
+      }
+    })
+    .catch(function(){});
+  }catch(e){}
+}
+function doUpdate(){
+  window.location.reload(true);
+}
 function init(){hydrate();var ts=document.getElementById('ob-start');if(ts)ts.value=today();if(cfg.name||exps.length){launchApp();}else{showInstallScreen();}}
 init();
 </script>
