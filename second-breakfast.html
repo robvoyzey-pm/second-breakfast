@@ -208,7 +208,7 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
 <div class="scr on" id="ob">
   <div class="ob-logo">Second Breakfast<em>.</em></div>
   <div class="ob-tag">a proper account of a proper adventure</div>
-  <div class="ob-card">
+  <div class="ob-card" id="ob-step1">
     <h2>The purse a halfling trusts on every adventure.</h2>
     <p>30 seconds to set up. Your coins stay on this device only. No servers, no cloud, no Sauron.</p>
     <label class="fl">Your name</label>
@@ -218,20 +218,25 @@ body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var
     <label class="fl">How do you want to budget?</label>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px"><button type="button" class="cad-btn on" id="ob-cad-weekly" onclick="setObCad('weekly')">Weekly</button><button type="button" class="cad-btn" id="ob-cad-monthly" onclick="setObCad('monthly')">Monthly</button><button type="button" class="cad-btn" id="ob-cad-pot" onclick="setObCad('pot')">Total pot</button><button type="button" class="cad-btn" id="ob-cad-tracking" onclick="setObCad('tracking')">No budget</button></div>
     <div id="ob-cad-desc" class="cad-desc"></div>
-    <div id="ob-amount-row"><label class="fl" id="ob-amount-lbl">Amount per week</label><input class="fi" id="ob-budget" type="number" value="1000" min="1" inputmode="decimal"></div>
+    <div id="ob-amount-row"><label class="fl" id="ob-amount-lbl">Amount per week</label><input class="fi" id="ob-budget" type="number" min="1" inputmode="decimal" placeholder="e.g. 500"></div>
     <div id="ob-pot-row" style="display:none"><label class="fl">Your total budget</label><input class="fi" id="ob-total-budget" type="number" min="1" inputmode="decimal" placeholder="e.g. 7000"></div>
     <div id="ob-tripdays-row" style="display:none"><label class="fl">How many days is your trip? <span style="font-weight:400;color:var(--ink3)">(optional)</span></label><input class="fi" id="ob-trip-days" type="number" min="1" inputmode="numeric" placeholder="e.g. 90"></div>
+    <button class="btn btn-p" onclick="obStep2()" style="margin-top:18px;padding:16px;font-size:1rem">Next →</button>
+  </div>
+  <div class="ob-card" id="ob-step2" style="display:none">
+    <h2>Where are you headed, and what’s in your pocket?</h2>
     <label class="fl">Home country</label>
-    <input class="fi" id="ob-home-country" placeholder="Australia" list="dl-countries" oninput="obHomeAutoFill()" onchange="obHomeAutoFill()" autocomplete="country">
+    <input class="fi" id="ob-home-country" placeholder="e.g. Australia" list="dl-countries" oninput="obHomeAutoFill()" onchange="obHomeAutoFill()" autocomplete="country">
     <label class="fl">Home currency</label>
-    <input class="fi" id="ob-home" value="AUD" maxlength="3" list="dl-currencies" autocomplete="nope" style="text-transform:uppercase" oninput="updateObRateLbl()">
+    <input class="fi" id="ob-home" maxlength="3" list="dl-currencies" autocomplete="nope" style="text-transform:uppercase" oninput="updateObRateLbl()" placeholder="e.g. AUD">
     <div class="fi2">
-      <div><label class="fl">Starting country</label><input class="fi" id="ob-country" value="India" list="dl-countries" oninput="obAutoFill()" onchange="obAutoFill()" autocomplete="country"></div>
-      <div><label class="fl">Local currency</label><input class="fi" id="ob-local" value="INR" maxlength="5" list="dl-currencies" autocomplete="nope" style="text-transform:uppercase"></div>
+      <div><label class="fl">Starting country</label><input class="fi" id="ob-country" list="dl-countries" oninput="obAutoFill()" onchange="obAutoFill()" autocomplete="country" placeholder="e.g. India"></div>
+      <div><label class="fl">Local currency</label><input class="fi" id="ob-local" maxlength="5" list="dl-currencies" autocomplete="nope" style="text-transform:uppercase" placeholder="e.g. INR"></div>
     </div>
     <label class="fl">Exchange rate (1 <span id="ob-rate-lbl">AUD</span> = how many local?)</label>
-    <div style="display:flex;gap:8px;align-items:center"><input class="fi" id="ob-rate" type="number" value="64.14" step="0.01" inputmode="decimal" style="flex:1"><button type="button" class="fetch-rate-btn" onclick="fetchRate('ob')">Get rate</button></div><div class="rate-msg" id="ob-rate-msg"></div>
-    <button class="btn btn-p" onclick="finishSetup()" style="margin-top:18px;padding:16px;font-size:1rem">I&#8217;m going on an adventure! &#8594;</button>
+    <div style="display:flex;gap:8px;align-items:center"><input class="fi" id="ob-rate" type="number" step="0.01" inputmode="decimal" style="flex:1" placeholder="e.g. 55.00"><button type="button" class="fetch-rate-btn" onclick="fetchRate('ob')">Get rate</button></div><div class="rate-msg" id="ob-rate-msg"></div>
+    <button class="btn btn-p" onclick="finishSetup()" style="margin-top:18px;padding:16px;font-size:1rem">I’m going on an adventure! →</button>
+    <button class="btn btn-g" onclick="obBack()" style="margin-top:8px;font-size:.85rem;color:var(--ink3)">← Back</button>
   </div>
 </div>
 
@@ -538,7 +543,7 @@ var RC=['#3A6418','#A05C1C','#2A5A28','#8C520A','#5A8C2E','#C07830','#4A7C22','#
 var CFLAGS={india:'\u{1F1EE}\u{1F1F3}',nepal:'\u{1F1F3}\u{1F1F5}','sri lanka':'\u{1F1F1}\u{1F1F0}',thailand:'\u{1F1F9}\u{1F1ED}',vietnam:'\u{1F1FB}\u{1F1F3}',indonesia:'\u{1F1EE}\u{1F1E9}',malaysia:'\u{1F1F2}\u{1F1FE}',cambodia:'\u{1F1F0}\u{1F1ED}',myanmar:'\u{1F1F2}\u{1F1F2}',laos:'\u{1F1F1}\u{1F1E6}',singapore:'\u{1F1F8}\u{1F1EC}',philippines:'\u{1F1F5}\u{1F1ED}',japan:'\u{1F1EF}\u{1F1F5}',australia:'\u{1F1E6}\u{1F1FA}','new zealand':'\u{1F1F3}\u{1F1FF}',spain:'\u{1F1EA}\u{1F1F8}',portugal:'\u{1F1F5}\u{1F1F9}',italy:'\u{1F1EE}\u{1F1F9}',france:'\u{1F1EB}\u{1F1F7}',germany:'\u{1F1E9}\u{1F1EA}',uk:'\u{1F1EC}\u{1F1E7}','united kingdom':'\u{1F1EC}\u{1F1E7}',usa:'\u{1F1FA}\u{1F1F8}','united states':'\u{1F1FA}\u{1F1F8}',mexico:'\u{1F1F2}\u{1F1FD}',peru:'\u{1F1F5}\u{1F1EA}',colombia:'\u{1F1E8}\u{1F1F4}',brazil:'\u{1F1E7}\u{1F1F7}',argentina:'\u{1F1E6}\u{1F1F7}',morocco:'\u{1F1F2}\u{1F1E6}',kenya:'\u{1F1F0}\u{1F1EA}','south africa':'\u{1F1FF}\u{1F1E6}',turkey:'\u{1F1F9}\u{1F1F7}',greece:'\u{1F1EC}\u{1F1F7}',croatia:'\u{1F1ED}\u{1F1F7}',iceland:'\u{1F1EE}\u{1F1F8}'};
 var CSYMS={INR:'\u20B9',NPR:'Rs',LKR:'Rs',THB:'\u0E3F',MMK:'K',USD:'$',EUR:'\u20AC',GBP:'\u00A3',AUD:'A$',NZD:'NZ$',SGD:'S$',MYR:'RM',VND:'\u20AB',IDR:'Rp',PHP:'\u20B1',JPY:'\u00A5',CNY:'\u00A5',MXN:'$',BRL:'R$',CAD:'CA$',HKD:'HK$',TWD:'NT$',KRW:'\u20A9',SEK:'kr',NOK:'kr',DKK:'kr',CHF:'Fr',PLN:'z\u0142',CZK:'K\u010d',HUF:'Ft',RON:'lei',TRY:'\u20BA',ZAR:'R',AED:'\u062f.\u0625',ILS:'\u20AA',EGP:'\u00A3',KES:'KSh',NGN:'\u20A6',GHS:'\u20B5',ARS:'$',COP:'$',PEN:'S/',CLP:'$',KHR:'\u17DB',LAK:'\u20AD',ISK:'kr',MAD:'\u062f.\u0645.'};
 var CCUR={india:'INR',nepal:'NPR','sri lanka':'LKR',thailand:'THB',vietnam:'VND',indonesia:'IDR',malaysia:'MYR',cambodia:'KHR',myanmar:'MMK',laos:'LAK',singapore:'SGD',philippines:'PHP',japan:'JPY',china:'CNY','hong kong':'HKD',australia:'AUD','new zealand':'NZD',spain:'EUR',portugal:'EUR',italy:'EUR',france:'EUR',germany:'EUR',greece:'EUR',croatia:'EUR',uk:'GBP','united kingdom':'GBP',usa:'USD','united states':'USD',canada:'CAD',mexico:'MXN',brazil:'BRL',argentina:'ARS',colombia:'COP',peru:'PEN',chile:'CLP',morocco:'MAD',kenya:'KES','south africa':'ZAR',turkey:'TRY',iceland:'ISK',egypt:'EGP','united arab emirates':'AED',uae:'AED',israel:'ILS',sweden:'SEK',norway:'NOK',denmark:'DKK',switzerland:'CHF',poland:'PLN',czechia:'CZK','czech republic':'CZK',hungary:'HUF',romania:'RON','south korea':'KRW',taiwan:'TWD',nigeria:'NGN',ghana:'GHS'};
-var cfg={name:'',tripStart:'',budget:1000,budgetType:'weekly',budgetDays:7,tripDays:0,totalBudget:0,homeCur:'AUD',theme:'light',lastLoc:'',customCats:[],catOverrides:{},profile:{country:'India',local:'INR',sym:'\u20B9',flag:'\u{1F1EE}\u{1F1F3}',rate:64.14}};
+var cfg={name:'',tripStart:'',budget:1000,budgetType:'weekly',budgetDays:7,tripDays:0,totalBudget:0,homeCur:'AUD',theme:'light',lastLoc:'',customCats:[],catOverrides:{},profile:{country:'',local:'AUD',sym:'$',flag:'',rate:1}};
 var exps=[],selId=null,confCatId=7,editCatId=7,lv='date';
 function persist(){try{localStorage.setItem(SK,JSON.stringify({cfg:cfg,exps:exps}))}catch(e){}}
 function hydrate(){try{var d=JSON.parse(localStorage.getItem(SK)||'{}');if(d.cfg)cfg=Object.assign({name:'',tripStart:today(),budget:1000,budgetType:'weekly',budgetDays:7,tripDays:0,totalBudget:0,homeCur:'AUD',theme:'light',lastLoc:'',customCats:[],catOverrides:{}},d.cfg);if(cfg.budgetCadence&&!cfg.budgetType){cfg.budgetType=cfg.budgetCadence==='custom'?'weekly':cfg.budgetCadence;}if(!cfg.budgetType)cfg.budgetType='weekly';if(d.exps)exps=d.exps}catch(e){}}
@@ -559,7 +564,7 @@ function catByName(n){var c=allCats();for(var i=0;i<c.length;i++){if(c[i].n===n)
 function allDays(){var days=[],s=new Date(cfg.tripStart),e=new Date(today());for(var i=0;i<exps.length;i++){var expDate=new Date(exps[i].date);if(exps[i].days&&exps[i].days>1){var tail=new Date(expDate.getTime()+(exps[i].days-1)*864e5);if(tail>e)e=tail;}else if(expDate>e){e=expDate;}}var d=new Date(s.getTime());while(d<=e){days.push(d.toISOString().split('T')[0]);d.setDate(d.getDate()+1)}return days}
 function symFor(l){return CSYMS[l]||l}
 function flagFor(l){var m={INR:'\u{1F1EE}\u{1F1F3}',NPR:'\u{1F1F3}\u{1F1F5}',LKR:'\u{1F1F1}\u{1F1F0}',THB:'\u{1F1F9}\u{1F1ED}',USD:'\u{1F1FA}\u{1F1F8}',EUR:'\u{1F1EA}\u{1F1FA}',GBP:'\u{1F1EC}\u{1F1E7}',AUD:'\u{1F1E6}\u{1F1FA}',NZD:'\u{1F1F3}\u{1F1FF}'};return m[l]||'\u{1F30D}'}
-function finishSetup(){gc('onboarding-completed','Onboarding completed');var name=document.getElementById('ob-name').value.trim();var start=document.getElementById('ob-start').value||today();var home=(document.getElementById('ob-home').value||'AUD').toUpperCase();var country=document.getElementById('ob-country').value.trim()||'India';var local=(document.getElementById('ob-local').value||'INR').toUpperCase();var rate=parseFloat(document.getElementById('ob-rate').value)||64.14;var budget=1000,totalBudget=0,tripDays=0;if(_obCadence==='weekly'||_obCadence==='monthly'){  budget=parseFloat(document.getElementById('ob-budget').value)||1000;}else if(_obCadence==='pot'){  totalBudget=parseFloat(document.getElementById('ob-total-budget').value)||0;  tripDays=parseInt(document.getElementById('ob-trip-days').value)||0;}else{  tripDays=parseInt(document.getElementById('ob-trip-days').value)||0;}cfg={name:name,tripStart:start,budget:budget,budgetType:_obCadence,budgetDays:7,tripDays:tripDays,totalBudget:totalBudget,homeCur:home,theme:'light',lastLoc:'',customCats:[],catOverrides:{},profile:{country:country,local:local,sym:symFor(local),flag:CFLAGS[country.toLowerCase()]||flagFor(local),rate:rate,rateUpdated:today()}};persist();launchApp()}
+function finishSetup(){gc('onboarding-completed','Onboarding completed');var name=document.getElementById('ob-name').value.trim();var start=document.getElementById('ob-start').value||today();var home=(document.getElementById('ob-home').value||'AUD').toUpperCase();var country=document.getElementById('ob-country').value.trim();var local=(document.getElementById('ob-local').value||home).toUpperCase();var rate=parseFloat(document.getElementById('ob-rate').value)||1;var budget=0,totalBudget=0,tripDays=0;if(_obCadence==='weekly'||_obCadence==='monthly'){budget=parseFloat(document.getElementById('ob-budget').value)||0;}else if(_obCadence==='pot'){totalBudget=parseFloat(document.getElementById('ob-total-budget').value)||0;tripDays=parseInt(document.getElementById('ob-trip-days').value)||0;}else{tripDays=parseInt(document.getElementById('ob-trip-days').value)||0;}cfg={name:name,tripStart:start,budget:budget,budgetType:_obCadence,budgetDays:7,tripDays:tripDays,totalBudget:totalBudget,homeCur:home,theme:'light',lastLoc:'',customCats:[],catOverrides:{},profile:{country:country,local:local,sym:symFor(local),flag:CFLAGS[country.toLowerCase()]||flagFor(local),rate:rate,rateUpdated:today()}};persist();launchApp()}
 function launchApp(){if(exps.length>0){gc('session-start','Session start');var _wn=wkNum(today());var _wk=localStorage.getItem('sb_wtrack')||'0';var _wkn=parseInt(_wk);if(_wn>=2&&_wkn<2){localStorage.setItem('sb_wtrack','2');gc('week-2-active','Week 2 active');}if(_wn>=4&&_wkn<4){localStorage.setItem('sb_wtrack','4');gc('week-4-active','Week 4 active');}};document.getElementById('ob').classList.remove('on');document.getElementById('ob-install').classList.remove('on');document.getElementById('app').classList.add('on');document.getElementById('cc-date').value=today();document.getElementById('cc-hclbl').textContent=cfg.homeCur;document.getElementById('cc-sym').textContent=cfg.profile.sym;document.getElementById('e-hclbl').textContent=cfg.homeCur;applyTheme();updateHeader();updateSettings();renderAll();clearCC();goView('add');checkForUpdate();}
 function updateHeader(){document.getElementById('hdr-pill').textContent=cfg.profile.flag+' '+cfg.profile.local}
 function autoFlag(){var c=document.getElementById('p-country').value.trim().toLowerCase();var f=CFLAGS[c];if(f)document.getElementById('p-flag').value=f}
@@ -761,7 +766,7 @@ function doImport(){document.getElementById('bk-input').click();}
 function handleImport(ev){var file=ev.target.files[0];if(!file)return;var r=new FileReader();r.onload=function(e){try{var text=e.target.result;if(text.trim().charAt(0)==='{'){var d=JSON.parse(text);if(!d.exps||!d.exps.length){showToast('No expenses found in backup');return;}var count=0;for(var i=0;i<d.exps.length;i++){var ne=d.exps[i],dup=false;for(var j=0;j<exps.length;j++){if(exps[j].id===ne.id||(exps[j].date===ne.date&&exps[j].catName===ne.catName&&Math.abs((exps[j].inr||0)-(ne.inr||0))<0.01)){dup=true;break;}}if(!dup){exps.push(ne);count++;}}exps.sort(function(a,b){return b.date.localeCompare(a.date);});persist();renderAll();showToast('Restored '+count+' expense'+(count!==1?'s':'')+' ✓');return;}text=text.replace(/^\uFEFF/,'');var lines=text.trim().split(/\r?\n/).slice(1),count=0;for(var i=0;i<lines.length;i++){var line=lines[i],cols=[],cur='',inQ=false;for(var k=0;k<=line.length;k++){var ch=line[k];if(inQ&&ch==='"'&&line[k+1]==='"'){cur+='"';k++;}else if(ch==='"'){inQ=!inQ;}else if((ch===','||k===line.length)&&!inQ){cols.push(cur);cur='';}else{cur+=(ch||'');}}var date=normaliseDate(cols[0]),country=cols[2]||'',catName=cols[3]||'Other',loc=cols[4]||'';var inr=cols[5]===''?0:parseFloat(cols[5]);if(isNaN(inr))inr=0;var aud=parseFloat(cols[6])||0,days=parseInt(cols[8])||0,note=cols[9]||'',rate=parseFloat(cols[10])||cfg.profile.rate,local=cols[11]||cfg.profile.local,sym=cols[12]||cfg.profile.sym,flag=cols[13]||'🌍';if(!date)continue;var dup=false;for(var j=0;j<exps.length;j++){if(exps[j].date===date&&exps[j].catName===catName&&Math.abs(exps[j].inr-inr)<0.01){dup=true;break;}}if(dup)continue;exps.push({id:date+catName+inr+Math.random(),date:date,catId:catByName(catName).id,catName:catName,country:country,flag:flag,loc:loc,inr:inr,aud:aud,days:days,note:note,rate:rate,local:local,sym:sym});count++;}exps.sort(function(a,b){return b.date.localeCompare(a.date);});persist();renderAll();showToast('Restored '+count+' expense'+(count!==1?'s':'')+' ✓');}catch(err){showToast('Restore failed — is this a Second Breakfast backup?');}};r.readAsText(file);ev.target.value='';}
 
 function clearExpenses(){if(!confirm('Remove all expenses? Your profile and settings are kept.'))return;exps=[];persist();closeAllModals();renderAll();goView('add');showToast('All expenses cleared')}
-function newTrip(){if(!confirm('Start a new trip? This clears everything and returns to setup.'))return;exps=[];cfg={name:'',tripStart:'',budget:1000,budgetType:'weekly',budgetDays:7,tripDays:0,totalBudget:0,homeCur:'AUD',theme:cfg.theme,lastLoc:'',customCats:[],profile:{country:'India',local:'INR',sym:'\u20B9',flag:'\u{1F1EE}\u{1F1F3}',rate:64.14}};persist();closeAllModals();clearCC();document.getElementById('app').classList.remove('on');var fields={'ob-name':'','ob-start':today(),'ob-budget':'1000','ob-home':'AUD','ob-home-country':'','ob-country':'India','ob-local':'INR','ob-rate':'64.14','ob-total-budget':'','ob-trip-days':''};Object.keys(fields).forEach(function(id){var el=document.getElementById(id);if(el)el.value=fields[id]});setObCad('weekly');_obCadence='weekly';document.getElementById('ob-rate-msg').textContent='';document.getElementById('ob').classList.add('on');showToast('Ready for a new adventure')}
+function newTrip(){if(!confirm('Start a new trip? This clears everything and returns to setup.'))return;exps=[];cfg={name:'',tripStart:'',budget:0,budgetType:'weekly',budgetDays:7,tripDays:0,totalBudget:0,homeCur:'AUD',theme:cfg.theme,lastLoc:'',customCats:[],profile:{country:'',local:'AUD',sym:'$',flag:'',rate:1}};persist();closeAllModals();clearCC();document.getElementById('app').classList.remove('on');var fields={'ob-name':'','ob-start':today(),'ob-budget':'1000','ob-home':'','ob-home-country':'','ob-country':'','ob-local':'','ob-rate':'','ob-total-budget':'','ob-trip-days':''};Object.keys(fields).forEach(function(id){var el=document.getElementById(id);if(el)el.value=fields[id]});setObCad('weekly');_obCadence='weekly';var s1=document.getElementById('ob-step1');if(s1)s1.style.display='block';var s2=document.getElementById('ob-step2');if(s2)s2.style.display='none';document.getElementById('ob-rate-msg').textContent='';document.getElementById('ob').classList.add('on');showToast('Ready for a new adventure')}
 var _trailTab='daily';
 function setTrailTab(tab){
   _trailTab=tab;
@@ -786,10 +791,47 @@ function isStandalone(){return window.navigator.standalone===true||window.matchM
 function detectPlatform(){var ua=navigator.userAgent;if(/iphone|ipad|ipod/i.test(ua))return'ios';if(/android/i.test(ua))return'android';return'other';}
 function showInstallScreen(){if(isStandalone()){installDone();return;}var _ip=localStorage.getItem('sb_ip');if(_ip){document.getElementById('ob').classList.add('on');return;}localStorage.setItem('sb_ip','1');setObCad('weekly');gc('install-prompt-shown','Install prompt shown');var p=detectPlatform();var el=document.getElementById('install-'+p);if(el)el.style.display='block';document.getElementById('ob-install').classList.add('on');document.getElementById('ob').classList.remove('on');}
 function doNativeInstall(){if(_dp){_dp.prompt();_dp.userChoice.then(function(r){_dp=null;if(r.outcome==='accepted')installDone();});}}
-function installDone(){gc('install-completed','Install completed');document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');setObCad(_obCadence||'weekly');}
-function installSkip(){gc('install-skipped','Install skipped');document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');setObCad(_obCadence||'weekly');}
+function installDone(){gc('install-completed','Install completed');document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');var s1=document.getElementById('ob-step1');if(s1)s1.style.display='block';var s2=document.getElementById('ob-step2');if(s2)s2.style.display='none';setObCad(_obCadence||'weekly');}
+function installSkip(){gc('install-skipped','Install skipped');document.getElementById('ob-install').classList.remove('on');document.getElementById('ob').classList.add('on');var s1=document.getElementById('ob-step1');if(s1)s1.style.display='block';var s2=document.getElementById('ob-step2');if(s2)s2.style.display='none';setObCad(_obCadence||'weekly');}
 function setBCad(c){['weekly','monthly','pot','tracking'].forEach(function(k){var el=document.getElementById('b-cad-'+k);if(el)el.classList.toggle('on',k===c);});var amtRow=document.getElementById('b-amount-row');var potRow=document.getElementById('b-pot-row');var daysRow=document.getElementById('b-tripdays-row');var amtLbl=document.getElementById('b-amount-lbl');var hclbl=document.getElementById('b-hclbl');var desc=document.getElementById('b-cad-desc');if(amtRow)amtRow.style.display=(c==='weekly'||c==='monthly')?'block':'none';if(potRow)potRow.style.display=c==='pot'?'block':'none';if(daysRow)daysRow.style.display=(c==='pot'||c==='tracking')?'block':'none';if(amtLbl)amtLbl.textContent='Amount per '+(c==='monthly'?'month':'week')+' in ';if(desc)desc.textContent=OB_DESCS[c]||'';document.getElementById('m-budget').setAttribute('data-budgettype',c);}
 var _obCadence='weekly';
+function obStep2(){
+  // Validate step 1
+  if(_obCadence==='weekly'||_obCadence==='monthly'){
+    var b=parseFloat(document.getElementById('ob-budget').value);
+    if(!b||b<=0){showToast('Enter your budget amount');return;}
+  }
+  if(_obCadence==='pot'){
+    var tb=parseFloat(document.getElementById('ob-total-budget').value);
+    if(!tb||tb<=0){showToast('Enter your total budget');return;}
+  }
+  // Auto-detect home currency from browser locale
+  var homeEl=document.getElementById('ob-home');
+  if(!homeEl.value){
+    try{
+      var locale=navigator.language||navigator.userLanguage||'';
+      var region=locale.split('-')[1]||'';
+      var LOCALE_CUR={AU:'AUD',GB:'GBP',US:'USD',CA:'CAD',NZ:'NZD',
+        IE:'EUR',FR:'EUR',DE:'EUR',ES:'EUR',IT:'EUR',PT:'EUR',NL:'EUR',
+        SE:'SEK',NO:'NOK',DK:'DKK',CH:'CHF',PL:'PLN',CZ:'CZK',HU:'HUF',
+        IN:'INR',JP:'JPY',CN:'CNY',SG:'SGD',HK:'HKD',ZA:'ZAR',
+        BR:'BRL',MX:'MXN',AR:'ARS',KE:'KES',NG:'NGN',EG:'EGP',
+        TR:'TRY',IL:'ILS',AE:'AED',TH:'THB',MY:'MYR',ID:'IDR',
+        PH:'PHP',VN:'VND',KR:'KRW',TW:'TWD'};
+      var detected=LOCALE_CUR[region.toUpperCase()];
+      if(detected){homeEl.value=detected;updateObRateLbl();}
+    }catch(e){}
+  }
+  document.getElementById('ob-step1').style.display='none';
+  document.getElementById('ob-step2').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function obBack(){
+  document.getElementById('ob-step2').style.display='none';
+  document.getElementById('ob-step1').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
 var OB_DESCS={'weekly':'I want a weekly limit I can check in on.','monthly':'I think in months. One amount, one month.','pot':'I’ve saved up a fixed amount. I want to make it last.','tracking':'I just want to know where the money went.'};function setObCad(c){_obCadence=c;['weekly','monthly','pot','tracking'].forEach(function(k){var el=document.getElementById('ob-cad-'+k);if(el)el.classList.toggle('on',k===c);});var amtRow=document.getElementById('ob-amount-row');var potRow=document.getElementById('ob-pot-row');var daysRow=document.getElementById('ob-tripdays-row');var amtLbl=document.getElementById('ob-amount-lbl');var desc=document.getElementById('ob-cad-desc');if(amtRow)amtRow.style.display=(c==='weekly'||c==='monthly')?'block':'none';if(potRow)potRow.style.display=c==='pot'?'block':'none';if(daysRow)daysRow.style.display=(c==='pot'||c==='tracking')?'block':'none';if(amtLbl)amtLbl.textContent=c==='monthly'?'Amount per month':'Amount per week';if(desc)desc.textContent=OB_DESCS[c]||'';}
 function updateObRateLbl(){var home=(document.getElementById('ob-home').value||'AUD').toUpperCase();var lbl=document.getElementById('ob-rate-lbl');if(lbl)lbl.textContent=home;}
 var _obHomeAutoFillTimer=null;function obHomeAutoFill(){clearTimeout(_obHomeAutoFillTimer);_obHomeAutoFillTimer=setTimeout(function(){var c=(document.getElementById('ob-home-country').value||'').trim().toLowerCase();var cur=CCUR[c];if(cur){document.getElementById('ob-home').value=cur;updateObRateLbl();}},150);}
