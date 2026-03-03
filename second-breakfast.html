@@ -481,7 +481,7 @@ window.addEventListener('beforeunload',function(){
 });
 function gc(path,title){if(_uid==='usr_6j2atr')return;try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:path+'/'+_uid,title:title||path,event:true});}}catch(e){}}
 var SK='sb_v1';
-var APP_VERSION='2.6';
+var APP_VERSION='2.7';
 var CATS=[
   {id:0,n:'Food & Drink',e:'\u{1F35B}',kw:[
     'food','eat','ate','meal','lunch','dinner','breakfast','brunch','supper','snack','buffet','set meal','tasting menu',
@@ -867,7 +867,7 @@ function doUpdate(){
   var url=window.location.href.split('?')[0]+'?v='+Date.now();
   window.location.href=url;
 }
-function init(){hydrate();var ts=document.getElementById('ob-start');if(ts)ts.value=today();if(cfg.name||exps.length){launchApp();}else{showInstallScreen();}}
+function init(){if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}hydrate();var ts=document.getElementById('ob-start');if(ts)ts.value=today();if(cfg.name||exps.length){launchApp();}else{showInstallScreen();}}
 init();
 </script>
 
