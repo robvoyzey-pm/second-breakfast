@@ -54,18 +54,24 @@ apply('daily chart label font size',
     '.dbl{font-size:.5rem;color:var(--ink3);margin-top:4px;text-align:center;line-height:1.3}',
     '.dbl{font-size:.48rem;color:var(--ink3);margin-top:4px;text-align:center;line-height:1.3;overflow:hidden}')
 
-# FIX 4: Daily chart container overflow - bars escape top of container
-apply('daily chart container overflow hidden',
-    '.dchart{display:flex;align-items:flex-end;gap:3px;height:70px}',
-    '.dchart{display:flex;align-items:flex-end;gap:3px;height:70px;overflow:hidden}')
+# FIX 4: Daily chart container - clip vertical overflow only, keep horizontal scroll
+apply('daily chart vertical clip only',
+    '.dcwrap{overflow-x:auto;scrollbar-width:none;padding-bottom:4px}',
+    '.dcwrap{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding-bottom:4px}')
 
-# FIX 5: Daily chart average - use same denominator as stat 2 (calendar days, not allDays length)
-apply('daily chart avg denominator matches stat 2',
-    'var spreadAvg=attributedToDate(today())/Math.max(days.length,1);',
-    'var chartDays=Math.max(1,Math.round((new Date(today())-new Date(cfg.tripStart))/864e5)+1);var spreadAvg=attributedToDate(today())/chartDays;')
+# FIX 5: Fix scroll offset to match wider bar columns (36px bar + 3px gap = 39px)
+apply('daily chart scroll offset matches bar width',
+    'c.parentElement.scrollLeft=Math.max(0,(idx-8)*33)',
+    'c.parentElement.scrollLeft=Math.max(0,(idx-8)*39)')
+
+
+# FIX 6: avg/day — simple total spend divided by days on trip
+apply('avg/day uses total spend not attributedToDate',
+    "var attributed=attributedToDate(t);var dailyAvg=attributed/days;",
+    "var dailyAvg=tot/days;")
 
 # VERSION
-apply('version 3.0->3.2', "APP_VERSION='3.0'", "APP_VERSION='3.2'")
+apply('version 3.0->3.3', "APP_VERSION='3.0'", "APP_VERSION='3.3'")
 
 if errors:
     print('\n'.join(errors))
@@ -98,15 +104,16 @@ checks = [
     ('Widget: at this pace',          'at this pace, lasts to'),
     ('Widget: pot willRunOut',        'willRunOut'),
     ('Chart: wider columns',          'width:36px'),
-    ('Chart: overflow hidden',         'height:70px;overflow:hidden'),
-    ('Chart: avg denominator fixed',   'chartDays=Math.max'),
+    ('Chart: vertical clip',          'overflow-y:hidden'),
+    ('Chart: scroll offset fixed',    '(idx-8)*39'),
+    ('Avg/day: simple calculation',   'var dailyAvg=tot/days;'),
     ('Service worker',                'serviceWorker'),
     ('GoatCounter',                   'goatcounter'),
     ('Rob uid filtered',              'usr_6j2atr'),
     ('rateUpdated',                   'rateUpdated'),
     ('catOverrides',                  'catOverrides'),
     ('cfg restore',                   'if(d.cfg)'),
-    ('Version 3.2',                   "APP_VERSION='3.2'"),
+    ('Version 3.3',                   "APP_VERSION='3.3'"),
 ]
 
 print('Audit:')
