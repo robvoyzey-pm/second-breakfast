@@ -59,6 +59,11 @@ apply('daily chart vertical clip only',
     '.dcwrap{overflow-x:auto;scrollbar-width:none;padding-bottom:4px}',
     '.dcwrap{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding-bottom:4px}')
 
+# FIX: Increase chart height so bar + label fits without overflow (bar=66px + label=~24px)
+apply('daily chart height accommodates bar and label',
+    '.dchart{display:flex;align-items:flex-end;gap:3px;height:70px}',
+    '.dchart{display:flex;align-items:flex-end;gap:3px;height:92px}')
+
 # FIX 5: Fix scroll offset to match wider bar columns (36px bar + 3px gap = 39px)
 apply('daily chart scroll offset matches bar width',
     'c.parentElement.scrollLeft=Math.max(0,(idx-8)*33)',
@@ -105,6 +110,7 @@ checks = [
     ('Widget: pot willRunOut',        'willRunOut'),
     ('Chart: wider columns',          'width:36px'),
     ('Chart: vertical clip',          'overflow-y:hidden'),
+    ('Chart: height accommodates label', 'height:92px'),
     ('Chart: scroll offset fixed',    '(idx-8)*39'),
     ('Avg/day: simple calculation',   'var dailyAvg=tot/days;'),
     ('Service worker',                'serviceWorker'),
