@@ -15,4 +15,4 @@ Works offline
 ---
 
 © 2026 Second Breakfast. Built by Rob Voyzey. All rights reserved.
-Feedback: secondbreakfast.app@gmail.com
+Feedback: secondbreakfast.feedback@gmail.com
