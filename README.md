@@ -5,10 +5,10 @@
 Single-file offline PWA expense tracker for long-term travellers.
 
 No account. No cloud. No Sauron.
-Natural language logging — write it how you'd say it
+Natural language logging. Simply write it how you'd say it
 Multi-currency, multi-country
 Multi-night accommodation spread
-Works offline forever
+Works offline
 
 **[Open the purse →](https://robvoyzey-pm.github.io/second-breakfast)**
 
