@@ -8,6 +8,7 @@ No account. No cloud. No Sauron.
 Natural language logging. Simply write it how you'd say it
 Multi-currency, multi-country
 Multi-night accommodation spread
+Designed for mobile tracking on the move
 Works offline
 
 **[Open the purse →](https://robvoyzey-pm.github.io/second-breakfast)**
